@@ -1,0 +1,15 @@
+.grid {
+  display: grid;
+  place-items: center;
+  max-height: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas: 
+    ". . ."
+    ". svg ."
+    ". . .";
+}
+
+.svg {
+  grid-area: svg;
+}

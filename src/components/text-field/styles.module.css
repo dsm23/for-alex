@@ -1,0 +1,78 @@
+.section {
+  position: relative;
+  border-bottom: 2px dashed var(--text-colour);
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  padding-top: 1.5rem;
+  transition: 500ms;
+  background-color: var(--background-grey);
+  cursor: text;
+}
+
+.section::after {
+  content: "";
+  position: relative;
+  display: block;
+  height: 0.25rem;
+  width: 100%;
+  background-color: var(--text-blue);
+  transform: scaleX(0);
+  transform-origin: 0%;
+  opacity: 0;
+  transition: all 500ms ease;
+  top: 2px;
+}
+
+.section:focus-within {
+  border-color: transparent;
+}
+
+.section:focus-within::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.input {
+  outline: none;
+  border: 0;
+  overflow: hidden;
+  width: calc(100% - 2rem);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  color: #FFF;
+  background-color: var(--background-grey);
+  font-size: 1.2rem;
+  font-weight: 600;
+  transition: border 500ms;
+  box-shadow: none;
+  border-color: transparent;
+  outline-color: transparent;
+}
+
+.input:valid {
+  color: var(--text-blue);
+}
+
+.input:invalid {
+  color: var(--text-error);
+}
+
+.label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  position: absolute;
+  padding-left: 1rem;
+  color: var(--text-blue);
+  background-color: var(--background-grey);
+  transform: translateY(-2rem);
+  cursor: text;
+  transform-origin: 1rem 0%;
+  transition: transform 400ms;
+}
+
+.section:focus-within .label,
+.input:not(:placeholder-shown) + .label {
+  transform: scale(0.8) translateY(-3.5rem);
+  cursor: default;
+}

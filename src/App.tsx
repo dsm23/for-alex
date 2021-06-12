@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import type { FunctionComponent } from "react";
+import { PrivateRoute } from "./components";
+import { ProvideAuth } from "./contexts/AuthContext";
+import { Home, Login, NoContent, Password } from "./pages";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import styles from "./app.module.css";
+
+const App: FunctionComponent = () => (
+  <ProvideAuth>
+    <Router>
+      <ul>
+        <li>
+          <Link to="/">Home Page</Link>
+        </li>
+        <li>
+          <Link to="/password">Change Password Page</Link>
+        </li>
+      </ul>
+
+      <main className={styles.main}>
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <PrivateRoute exact path="/">
+            <Home />
+          </PrivateRoute>
+          <PrivateRoute path="/password">
+            <Password />
+          </PrivateRoute>
+          <Route component={NoContent} />
+        </Switch>
+      </main>
+    </Router>
+  </ProvideAuth>
+);
 
 export default App;
